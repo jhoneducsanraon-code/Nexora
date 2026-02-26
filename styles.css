@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Nexora el valor de amor</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="main">
-    <img class="main" src="https://uploads.onecompiler.io/44ekz7jdp/44eq4uun2/descarga.jfif">
-    <div class="Nexora">
-      <div class="logo">Nexora</div)
-    </div>
-  </div>
-
-</body>
-
-</html>
+*{
+  margin: 0;
+  padding: 0;
+}
+.main{
+  transform: rotate(90deg);
+  display: block;
+}
