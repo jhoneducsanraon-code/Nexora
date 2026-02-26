@@ -2,6 +2,11 @@
   margin: 0;
   padding: 0;
 }
+body{
+  background:red
+}
+
+  text-color:red
 .main{
   transform: rotate(90deg);
   display: block;
