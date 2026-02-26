@@ -8,6 +8,6 @@ body{
 
   text-color:red
 .main{
-  transform: rotate(125deg);
+  transform: rotate(0deg);
   display: block;
 }
