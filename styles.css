@@ -5,13 +5,3 @@
 body{
   background:red
 }
-.logo{
-  margin-left:-234px;
-  trasform:rotate(180deg)
-}
-
-  text-color:red
-.main{
-  transform: rotate(0deg);
-  display: block;
-}
