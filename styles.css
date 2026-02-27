@@ -3,6 +3,7 @@
                       url("imagen.jpg");
     background-size: cover;
     background-position: center;
+   margin: 0;
 }
 }
 .logo{
@@ -12,4 +13,11 @@
    height: 400px;
    width: 100%;
 }
+header {
+    display: flex;
+    justify-content: flex-start; /* izquierda */
+    align-items: flex-start;     /* arriba */
+    padding: 20px;
+}
+
 
