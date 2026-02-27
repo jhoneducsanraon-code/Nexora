@@ -1,3 +1,10 @@
+ body {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                      url("imagen.jpg");
+    background-size: cover;
+    background-position: center;
+}
+}
 .logo{
    background-image: url("imagen.jpg");
    background-size: cover;
