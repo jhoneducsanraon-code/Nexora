@@ -1,15 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>Nexora el valor de amor</title>
+  <meta charset="UTF-8">
+  <title>Nexora</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div>
-    <img class="main" src="fondo.png">
-    <div class="Nexora">
-      <div class="logo"></div)
-    </div>
+
+<div class="container">
+
+  <!-- LOGIN -->
+  <div class="card" id="loginBox">
+    <h2>Iniciar Sesión</h2>
+    <input type="text" id="username" placeholder="Usuario">
+    <input type="password" id="password" placeholder="Contraseña">
+    <button onclick="login()">Entrar</button>
   </div>
+
+  <!-- PERFIL -->
+  <div class="card hidden" id="perfil">
+    <h2>Perfil</h2>
+    <p><strong>Usuario:</strong> <span id="perfilNombre"></span></p>
+    <p><strong>Rol:</strong> <span id="perfilRol"></span></p>
+
+    <button onclick="verCatalogo()">Ver Catálogo</button>
+    <button onclick="logout()">Cerrar sesión</button>
+  </div>
+
+  <!-- CATALOGO -->
+  <div class="card hidden" id="catalogo">
+    <h2>Catálogo de Paisajes</h2>
+
+    <div class="grid">
+      <div class="item">
+        <img src="https://picsum.photos/300/200?random=1">
+        <p>Montañas</p>
+      </div>
+
+      <div class="item">
+        <img src="https://picsum.photos/300/200?random=2">
+        <p>Playa</p>
+      </div>
+
+      <div class="item">
+        <img src="https://picsum.photos/300/200?random=3">
+        <p>Bosque</p>
+      </div>
+    </div>
+
+    <div id="adminPanel" class="hidden admin">
+      <h3>Panel Administrador</h3>
+      <button onclick="agregarItem()">Agregar Paisaje</button>
+    </div>
+
+    <button onclick="volverPerfil()">Volver al Perfil</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
