@@ -1,60 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Nexora</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<title>Nexora Pro</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div class="container">
 
-  <!-- LOGIN -->
-  <div class="card" id="loginBox">
-    <h2>Iniciar Sesión</h2>
-    <input type="text" id="username" placeholder="Usuario">
-    <input type="password" id="password" placeholder="Contraseña">
-    <button onclick="login()">Entrar</button>
-  </div>
+<!-- LOGIN -->
+<div class="card" id="loginBox">
+<h2>Iniciar Sesión</h2>
+<input type="text" id="loginUser" placeholder="Usuario">
+<input type="password" id="loginPass" placeholder="Contraseña">
+<button onclick="login()">Entrar</button>
+<p class="switch" onclick="mostrarRegistro()">Crear cuenta</p>
+</div>
 
-  <!-- PERFIL -->
-  <div class="card hidden" id="perfil">
-    <h2>Perfil</h2>
-    <p><strong>Usuario:</strong> <span id="perfilNombre"></span></p>
-    <p><strong>Rol:</strong> <span id="perfilRol"></span></p>
+<!-- REGISTRO -->
+<div class="card hidden" id="registroBox">
+<h2>Registro</h2>
+<input type="text" id="regUser" placeholder="Usuario">
+<input type="password" id="regPass" placeholder="Contraseña">
+<button onclick="registrar()">Registrarse</button>
+<p class="switch" onclick="mostrarLogin()">Volver</p>
+</div>
 
-    <button onclick="verCatalogo()">Ver Catálogo</button>
-    <button onclick="logout()">Cerrar sesión</button>
-  </div>
+<!-- PERFIL -->
+<div class="card hidden" id="perfilBox">
+<h2>Perfil</h2>
+<img id="fotoPerfil" class="avatar">
+<p><strong>Usuario:</strong> <span id="perfilNombre"></span></p>
+<p><strong>Rol:</strong> <span id="perfilRol"></span></p>
 
-  <!-- CATALOGO -->
-  <div class="card hidden" id="catalogo">
-    <h2>Catálogo de Paisajes</h2>
+<input type="text" id="nuevaFoto" placeholder="URL nueva foto">
+<button onclick="cambiarFoto()">Cambiar foto</button>
 
-    <div class="grid">
-      <div class="item">
-        <img src="https://picsum.photos/300/200?random=1">
-        <p>Montañas</p>
-      </div>
+<button onclick="verCatalogo()">Ver Catálogo</button>
+<button onclick="logout()">Cerrar sesión</button>
+</div>
 
-      <div class="item">
-        <img src="https://picsum.photos/300/200?random=2">
-        <p>Playa</p>
-      </div>
+<!-- CATALOGO -->
+<div class="card hidden" id="catalogoBox">
+<h2>Catálogo</h2>
 
-      <div class="item">
-        <img src="https://picsum.photos/300/200?random=3">
-        <p>Bosque</p>
-      </div>
-    </div>
+<div class="grid" id="gridPaisajes"></div>
 
-    <div id="adminPanel" class="hidden admin">
-      <h3>Panel Administrador</h3>
-      <button onclick="agregarItem()">Agregar Paisaje</button>
-    </div>
+<div id="adminPanel" class="hidden admin">
+<h3>Panel Administrador</h3>
+<button onclick="agregarPaisaje()">Agregar paisaje</button>
+</div>
 
-    <button onclick="volverPerfil()">Volver al Perfil</button>
-  </div>
+<button onclick="volverPerfil()">Volver</button>
+</div>
 
 </div>
 
