@@ -1,8 +1,8 @@
-*{
-  margin: 0;
-  padding: 0;
-}
 .logo{
-  text-color:with
+   background-image: url("imagen.jpg");
+   background-size: cover;
+   background-position: center;
+   height: 400px;
+   width: 100%;
 }
 
