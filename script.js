@@ -1,61 +1,113 @@
-window.onload = function() {
-    const userData = JSON.parse(localStorage.getItem("usuario"));
-    if (userData) {
-        mostrarPerfil(userData);
-    }
+let paisajes = [
+"https://picsum.photos/300/200?1",
+"https://picsum.photos/300/200?2",
+"https://picsum.photos/300/200?3"
+];
+
+window.onload = function(){
+if(!localStorage.getItem("usuarios")){
+localStorage.setItem("usuarios", JSON.stringify([
+{nombre:"admin",password:"1234",rol:"Administrador",foto:"https://i.pravatar.cc/100?img=1",favoritos:[]}
+]));
 }
 
-function login() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+const actual = JSON.parse(localStorage.getItem("actual"));
+if(actual){mostrarPerfil(actual);}
+};
 
-    if (!username || !password) {
-        alert("Completa los campos");
-        return;
-    }
-
-    let rol = "Usuario";
-
-    if (username === "admin" && password === "1234") {
-        rol = "Administrador";
-    }
-
-    const userData = { nombre: username, rol: rol };
-
-    localStorage.setItem("usuario", JSON.stringify(userData));
-
-    mostrarPerfil(userData);
+function mostrarRegistro(){
+loginBox.classList.add("hidden");
+registroBox.classList.remove("hidden");
 }
 
-function mostrarPerfil(user) {
-    document.getElementById("loginBox").classList.add("hidden");
-    document.getElementById("perfil").classList.remove("hidden");
-
-    document.getElementById("perfilNombre").textContent = user.nombre;
-    document.getElementById("perfilRol").textContent = user.rol;
+function mostrarLogin(){
+registroBox.classList.add("hidden");
+loginBox.classList.remove("hidden");
 }
 
-function verCatalogo() {
-    const user = JSON.parse(localStorage.getItem("usuario"));
-
-    document.getElementById("perfil").classList.add("hidden");
-    document.getElementById("catalogo").classList.remove("hidden");
-
-    if (user.rol === "Administrador") {
-        document.getElementById("adminPanel").classList.remove("hidden");
-    }
+function registrar(){
+let usuarios = JSON.parse(localStorage.getItem("usuarios"));
+let nuevo={
+nombre:regUser.value,
+password:regPass.value,
+rol:"Usuario",
+foto:"https://i.pravatar.cc/100",
+favoritos:[]
+};
+usuarios.push(nuevo);
+localStorage.setItem("usuarios",JSON.stringify(usuarios));
+alert("Registrado");
+mostrarLogin();
 }
 
-function volverPerfil() {
-    document.getElementById("catalogo").classList.add("hidden");
-    document.getElementById("perfil").classList.remove("hidden");
+function login(){
+let usuarios = JSON.parse(localStorage.getItem("usuarios"));
+let user = usuarios.find(u=>u.nombre===loginUser.value && u.password===loginPass.value);
+if(user){
+localStorage.setItem("actual",JSON.stringify(user));
+mostrarPerfil(user);
+}else{
+alert("Datos incorrectos");
+}
 }
 
-function agregarItem() {
-    alert("Aquí podrías agregar más paisajes dinámicamente 😎");
+function mostrarPerfil(user){
+loginBox.classList.add("hidden");
+perfilBox.classList.remove("hidden");
+perfilNombre.textContent=user.nombre;
+perfilRol.textContent=user.rol;
+fotoPerfil.src=user.foto;
+if(user.rol==="Administrador"){
+adminPanel.classList.remove("hidden");
+}
 }
 
-function logout() {
-    localStorage.removeItem("usuario");
-    location.reload();
+function cambiarFoto(){
+let actual=JSON.parse(localStorage.getItem("actual"));
+actual.foto=nuevaFoto.value;
+let usuarios=JSON.parse(localStorage.getItem("usuarios"));
+usuarios=usuarios.map(u=>u.nombre===actual.nombre?actual:u);
+localStorage.setItem("usuarios",JSON.stringify(usuarios));
+localStorage.setItem("actual",JSON.stringify(actual));
+fotoPerfil.src=actual.foto;
+}
+
+function verCatalogo(){
+perfilBox.classList.add("hidden");
+catalogoBox.classList.remove("hidden");
+renderPaisajes();
+}
+
+function renderPaisajes(){
+gridPaisajes.innerHTML="";
+paisajes.forEach(p=>{
+gridPaisajes.innerHTML+=`
+<div class="item">
+<img src="${p}">
+<button onclick="guardarFavorito('${p}')">❤</button>
+</div>`;
+});
+}
+
+function guardarFavorito(url){
+let actual=JSON.parse(localStorage.getItem("actual"));
+actual.favoritos.push(url);
+localStorage.setItem("actual",JSON.stringify(actual));
+alert("Guardado en favoritos");
+}
+
+function agregarPaisaje(){
+let nueva=prompt("URL del paisaje:");
+paisajes.push(nueva);
+renderPaisajes();
+}
+
+function volverPerfil(){
+catalogoBox.classList.add("hidden");
+perfilBox.classList.remove("hidden");
+}
+
+function logout(){
+localStorage.removeItem("actual");
+location.reload();
 }
