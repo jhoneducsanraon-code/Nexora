@@ -3,138 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniMove - Transporte Universitario Junín</title>
+    <title>UniMove - Login Completo</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
             --primary-blue: #1E40AF;
-            --primary-blue-light: #3B82F6;
             --success-green: #10B981;
             --danger-red: #EF4444;
-            --warning-yellow: #F59E0B;
             --bg-light: #F8FAFC;
             --bg-white: #FFFFFF;
             --text-dark: #1E293B;
             --text-gray: #64748B;
-            --border-gray: #E2E8F0;
-            --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.1);
-            --shadow-md: 0 4px 6px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: var(--bg-light);
-        }
-
-        /* Header */
-        .header {
-            background: var(--bg-white);
-            box-shadow: var(--shadow-sm);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-            font-size: 0.95rem;
-        }
-
-        .btn-primary { background: var(--primary-blue); color: white; }
-        .btn-success { background: var(--success-green); color: white; }
-        .btn-danger { background: var(--danger-red); color: white; }
-        .btn-secondary { background: transparent; color: var(--text-gray); border: 2px solid var(--border-gray); }
-        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
-        }
-
-        .hamburger span { width: 25px; height: 3px; background: var(--primary-blue); transition: 0.3s; }
-
-        /* Auth Forms */
-        .auth-container {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, var(--primary-blue), #3B82F6);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 1rem;
         }
 
-        .auth-card {
+        .login-container {
             background: var(--bg-white);
             padding: 3rem;
             border-radius: 24px;
             box-shadow: var(--shadow-lg);
             width: 100%;
-            max-width: 450px;
-        }
-
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid var(--border-gray);
-        }
-
-        .auth-tab {
-            flex: 1;
-            padding: 1rem;
+            max-width: 420px;
             text-align: center;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--text-gray);
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
         }
 
-        .auth-tab.active {
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-blue), var(--success-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .login-title {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .login-subtitle {
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* CREDENCIALES DE DEMO - SUPER VISIBLES */
+        .demo-creds {
+            background: #ECFDF5;
+            border: 2px solid var(--success-green);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .demo-title {
+            font-weight: 700;
+            color: var(--success-green);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .cred-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .cred-email { font-weight: 600; color: var(--text-dark); }
+        .cred-pass { 
+            background: #F3F4F6; 
+            padding: 0.5rem 1rem; 
+            border-radius: 8px; 
+            font-family: monospace;
+            font-weight: 700;
             color: var(--primary-blue);
-            border-bottom-color: var(--primary-blue);
         }
 
         .form-group {
             margin-bottom: 1.5rem;
+            text-align: left;
         }
 
         .form-group label {
@@ -146,611 +111,252 @@
 
         .form-group input {
             width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--border-gray);
-            border-radius: 12px;
+            padding: 1.25rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 16px;
             font-size: 1rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            background: #FAFAFA;
         }
 
         .form-group input:focus {
             outline: none;
             border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1);
+            box-shadow: 0 0 0 4px rgba(30,64,175,0.1);
+            background: white;
         }
 
-        /* Main App */
-        .app-container { max-width: 1200px; margin: 0 auto; padding: 2rem; display: none; }
-
-        .page-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .page-header h1 {
-            color: var(--primary-blue);
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Selectors */
-        .selectors {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .select-card {
-            background: var(--bg-white);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-gray);
-        }
-
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: var(--bg-white);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s;
-            border: 1px solid var(--border-gray);
-            position: relative;
-        }
-
-        .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-
-        .status-badge {
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .status-waiting { background: #FEF3C7; color: var(--warning-yellow); }
-        .status-enroute { background: #D1FAE5; color: var(--success-green); }
-        .status-full { background: #FEE2E2; color: var(--danger-red); }
-        .status-finished { background: #E5E7EB; color: var(--text-gray); }
-
-        /* Users Table Admin */
-        .users-table {
-            background: var(--bg-white);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: var(--shadow-md);
-            overflow-x: auto;
-        }
-
-        table {
+        .login-btn {
             width: 100%;
-            border-collapse: collapse;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, var(--primary-blue), #3B82F6);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1rem;
         }
 
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-gray);
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
-        th { font-weight: 700; color: var(--text-dark); }
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
 
-        .user-status {
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
+        .divider {
+            position: relative;
+            margin: 2rem 0;
+            color: var(--text-gray);
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #E5E7EB;
+        }
+
+        .divider span {
+            background: var(--bg-white);
+            padding: 0 1rem;
+        }
+
+        .demo-link {
+            color: var(--primary-blue);
+            text-decoration: none;
             font-weight: 600;
         }
 
-        .status-active { background: #D1FAE5; color: var(--success-green); }
-        .status-banned { background: #FEE2E2; color: var(--danger-red); }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .hamburger { display: flex; }
-            .nav-actions { position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px); background: var(--bg-white); flex-direction: column; padding: 2rem; transition: left 0.3s; }
-            .nav-actions.active { left: 0; }
-            .cards-grid { grid-template-columns: 1fr; }
-            .selectors { grid-template-columns: 1fr; }
-            .auth-card { padding: 2rem 1.5rem; }
-            .btn { width: 100%; }
-        }
-
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .card, .auth-card { animation: fadeIn 0.5s ease; }
-
         .notification {
             position: fixed;
-            top: 100px;
-            right: 20px;
-            padding: 1.5rem 2rem;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100%);
+            padding: 1rem 2rem;
             border-radius: 12px;
             color: white;
             font-weight: 600;
             z-index: 1000;
-            transform: translateX(400px);
             transition: all 0.4s;
+            min-width: 300px;
+        }
+
+        .notification.success { background: var(--success-green); }
+        .notification.error { background: var(--danger-red); }
+
+        @media (max-width: 480px) {
+            .login-container { padding: 2rem 1.5rem; margin: 1rem; }
+            .notification { min-width: 90vw; left: 5%; transform: translateX(0) translateY(-100%); }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header" id="header" style="display: none;">
-        <nav class="navbar">
-            <div class="logo">
-                <i class="fas fa-bus"></i> UniMove
-            </div>
-            <div class="nav-actions" id="navActions">
-                <span id="userInfo" style="font-weight: 600;"></span>
-                <button class="btn btn-danger" onclick="logout()">
-                    <i class="fas fa-sign-out-alt"></i> Salir
-                </button>
-            </div>
-            <div class="hamburger" id="hamburger">
-                <span></span><span></span><span></span>
-            </div>
-        </nav>
-    </header>
+    <div class="login-container" id="loginContainer">
+        <div class="logo">
+            <i class="fas fa-bus"></i> UniMove
+        </div>
+        
+        <h1 class="login-title">Bienvenido</h1>
+        <p class="login-subtitle">Inicia sesión para acceder a tu panel</p>
 
-    <!-- Landing -->
-    <section id="landing" class="auth-container active-section">
-        <div class="auth-card">
-            <h1 style="color: var(--primary-blue); margin-bottom: 1rem; font-size: 2.5rem;">
-                <i class="fas fa-bus"></i> UniMove
-            </h1>
-            <p style="color: var(--text-gray); margin-bottom: 2rem; font-size: 1.2rem;">
-                Llega puntual a tus clases sin perder tiempo
-            </p>
-            <button class="btn btn-primary" style="width: 100%; font-size: 1.2rem; padding: 1.25rem;" onclick="showAuth('login')">
+        <!-- 🎯 CREDENCIALES DE DEMO SUPER VISIBLES -->
+        <div class="demo-creds">
+            <div class="demo-title">
+                <i class="fas fa-key"></i> USUARIOS DE PRUEBA
+            </div>
+            <div class="cred-item">
+                <span class="cred-email">ana@estudiante.com</span>
+                <span class="cred-pass">123</span>
+                <span><i class="fas fa-user-graduate" style="color: #F59E0B;"></i> Estudiante</span>
+            </div>
+            <div class="cred-item">
+                <span class="cred-email">carlos@conductor.com</span>
+                <span class="cred-pass">123</span>
+                <span><i class="fas fa-user-tie" style="color: #10B981;"></i> Conductor</span>
+            </div>
+            <div class="cred-item">
+                <span class="cred-email">admin@admin.com</span>
+                <span class="cred-pass">123</span>
+                <span><i class="fas fa-user-shield" style="color: #8B5CF6;"></i> Admin</span>
+            </div>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" id="loginEmail" placeholder="ejemplo@dominio.com" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-lock"></i> Contraseña</label>
+                <input type="password" id="loginPassword" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="login-btn" id="loginBtn">
                 <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
             </button>
-            <p style="margin-top: 1.5rem; color: var(--text-gray);">
-                ¿Nuevo usuario? <a href="#" style="color: var(--primary-blue); font-weight: 600;" onclick="showAuth('register')">Regístrate aquí</a>
-            </p>
+        </form>
+
+        <div class="divider">
+            <span>o regístrate</span>
         </div>
-    </section>
 
-    <!-- Auth Forms -->
-    <section id="auth" class="auth-container">
-        <div class="auth-card">
-            <div class="auth-tabs">
-                <div class="auth-tab active" onclick="switchAuth('login')">Iniciar Sesión</div>
-                <div class="auth-tab" onclick="switchAuth('register')">Registrarse</div>
-            </div>
-            <form id="authForm">
-                <div class="form-group">
-                    <label><i class="fas fa-user"></i> Nombre Completo</label>
-                    <input type="text" id="nombre" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-envelope"></i> Email</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-lock"></i> Contraseña</label>
-                    <input type="password" id="password" required>
-                </div>
-                <div class="form-group" id="rolGroup" style="display: none;">
-                    <label><i class="fas fa-user-tag"></i> Rol</label>
-                    <select id="rol" required>
-                        <option value="estudiante">Estudiante</option>
-                        <option value="conductor">Conductor</option>
-                        <option value="admin">Administrador</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
-                    <span id="authBtnText">Iniciar Sesión</span>
-                </button>
-            </form>
-            <p style="margin-top: 1.5rem; text-align: center; color: var(--text-gray);">
-                <a href="#" onclick="showLanding()" style="color: var(--primary-blue); font-weight: 600;">Volver al inicio</a>
-            </p>
-        </div>
-    </section>
+        <button class="login-btn" style="background: #6B7280; margin-bottom: 1rem;" onclick="showRegister()">
+            <i class="fas fa-user-plus"></i> Crear Cuenta
+        </button>
 
-    <!-- App Container -->
-    <div id="appContainer" class="app-container">
-        <!-- Student Panel -->
-        <section id="studentPanel" class="panel">
-            <div class="page-header">
-                <h1><i class="fas fa-user-graduate"></i> Panel Estudiante</h1>
-            </div>
-            <div class="selectors">
-                <div class="select-card">
-                    <label><i class="fas fa-map-marker-alt"></i> Origen</label>
-                    <select id="origenSelect" onchange="renderStudentRoutes()"></select>
-                </div>
-                <div class="select-card">
-                    <label><i class="fas fa-flag-checkered"></i> Destino</label>
-                    <select id="destinoSelect" onchange="renderStudentRoutes()"></select>
-                </div>
-            </div>
-            <div class="cards-grid" id="studentRoutes"></div>
-        </section>
-
-        <!-- Driver Panel -->
-        <section id="driverPanel" class="panel">
-            <div class="page-header">
-                <h1><i class="fas fa-user-tie"></i> Panel Conductor</h1>
-            </div>
-            <div class="cards-grid">
-                <div class="card" id="driverCard">
-                    <!-- Driver content rendered dynamically -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Admin Panel -->
-        <section id="adminPanel" class="panel">
-            <div class="page-header">
-                <h1><i class="fas fa-user-shield"></i> Panel Administrador</h1>
-            </div>
-            <div class="users-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Rol</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="usersTable"></tbody>
-                </table>
-            </div>
-        </section>
+        <p style="color: var(--text-gray);">
+            ¿Problemas? <a href="#" class="demo-link" onclick="showAdminAccess()">Acceso Admin</a>
+        </p>
     </div>
 
     <script>
         // ========================================
-        // DATOS DEL SISTEMA
+        // USUARIOS DE SISTEMA (SIMULADOS)
         // ========================================
-        const CIUDADES = ['Pichanaqui', 'Satipo', 'Mazamari', 'Pangoa'];
-        const TRAMOS = [
-            { origen: "Pichanaqui", destino: "Satipo", tiempo: 60 },
-            { origen: "Satipo", destino: "Mazamari", tiempo: 20 },
-            { origen: "Pangoa", destino: "Mazamari", tiempo: 10 }
-        ];
-        const HORARIOS = ['07:30', '08:45', '10:15', '12:00', '14:30'];
-
-        let usuarios = [
-            { id: 1, nombre: 'Ana García', email: 'ana@estudiante.com', password: '123', rol: 'estudiante', estado: 'activo' },
-            { id: 2, nombre: 'Carlos López', email: 'carlos@conductor.com', password: '123', rol: 'conductor', estado: 'activo' },
-            { id: 3, nombre: 'Admin Master', email: 'admin@admin.com', password: '123', rol: 'admin', estado: 'activo' },
-            { id: 4, nombre: 'Juan Baneado', email: 'juan@baneado.com', password: '123', rol: 'estudiante', estado: 'baneado' }
+        const USUARIOS = [
+            { id: 1, email: 'ana@estudiante.com', password: '123', rol: 'estudiante', nombre: 'Ana García', estado: 'activo' },
+            { id: 2, email: 'carlos@conductor.com', password: '123', rol: 'conductor', nombre: 'Carlos López', estado: 'activo' },
+            { id: 3, email: 'admin@admin.com', password: '123', rol: 'admin', nombre: 'Admin Master', estado: 'activo' },
+            { id: 4, email: 'juan@baneado.com', password: '123', rol: 'estudiante', nombre: 'Juan Baneado', estado: 'baneado' }
         ];
 
-        let reservas = [];
         let currentUser = null;
-        let authMode = 'login';
 
         // ========================================
-        // INICIALIZACIÓN
+        // LOGIN PRINCIPAL
         // ========================================
-        function init() {
-            populateSelects();
-            loadSession();
-            setupEventListeners();
-            simulateData();
-        }
-
-        // ========================================
-        // AUTENTICACIÓN
-        // ========================================
-        function showLanding() {
-            hideAllSections();
-            document.getElementById('landing').classList.add('active-section');
-            document.getElementById('header').style.display = 'none';
-        }
-
-        function showAuth(mode) {
-            hideAllSections();
-            document.getElementById('auth').classList.add('active-section');
-            authMode = mode;
-            switchAuth(mode);
-        }
-
-        function switchAuth(mode) {
-            authMode = mode;
-            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            document.getElementById('rolGroup').style.display = mode === 'register' ? 'block' : 'none';
-            document.getElementById('authBtnText').textContent = mode === 'login' ? 'Iniciar Sesión' : 'Registrarse';
-            document.getElementById('nombre').required = mode === 'register';
-            document.getElementById('nombre').placeholder = mode === 'register' ? 'Nombre completo' : '';
-        }
-
-        document.getElementById('authForm').addEventListener('submit', function(e) {
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            if (authMode === 'login') {
-                login();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const usuario = USUARIOS.find(u => u.email === email && u.password === password);
+            
+            if (usuario) {
+                if (usuario.estado === 'baneado') {
+                    showNotification('❌ Usuario baneado. Contacta al administrador.', 'error');
+                    return;
+                }
+                
+                currentUser = usuario;
+                showNotification(`✅ Bienvenido ${usuario.nombre}! (${usuario.rol})`, 'success');
+                
+                // SIMULAR REDIRECCIÓN AL PANEL
+                setTimeout(() => {
+                    alert(`🚀 Redirigiendo a Panel ${usuario.rol.toUpperCase()}...\n\nUsuario: ${usuario.nombre}\nRol: ${usuario.rol}`);
+                    // Aquí iría la navegación real al panel
+                    console.log('Navegando a:', usuario.rol + 'Panel');
+                }, 1500);
+                
             } else {
-                register();
+                showNotification('❌ Email o contraseña incorrectos', 'error');
+                document.getElementById('loginEmail').focus();
             }
         });
 
-        function login() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            const usuario = usuarios.find(u => u.email === email && u.password === password);
-            if (usuario) {
-                if (usuario.estado === 'baneado') {
-                    showNotification('Usuario baneado. Contacta al administrador.', 'error');
-                    return;
-                }
-                currentUser = usuario;
-                saveSession();
-                showDashboard();
-            } else {
-                showNotification('Credenciales incorrectas', 'error');
-            }
-        }
-
-        function register() {
-            const nombre = document.getElementById('nombre').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const rol = document.getElementById('rol').value;
-
-            if (usuarios.find(u => u.email === email)) {
-                showNotification('Email ya registrado', 'error');
-                return;
-            }
-
-            const nuevoUsuario = {
-                id: Date.now(),
-                nombre,
-                email,
-                password,
-                rol,
-                estado: 'activo'
-            };
-
-            usuarios.push(nuevoUsuario);
-            currentUser = nuevoUsuario;
-            saveSession();
-            showNotification('Registro exitoso', 'success');
-            showDashboard();
-        }
-
-        function logout() {
-            localStorage.removeItem('unimove_session');
-            currentUser = null;
-            showLanding();
-        }
-
-        function saveSession() {
-            localStorage.setItem('unimove_session', JSON.stringify({
-                userId: currentUser.id,
-                timestamp: Date.now()
-            }));
-        }
-
-        function loadSession() {
-            const session = localStorage.getItem('unimove_session');
-            if (session) {
-                const data = JSON.parse(session);
-                const usuario = usuarios.find(u => u.id === data.userId);
-                if (usuario && usuario.estado === 'activo') {
-                    currentUser = usuario;
-                    showDashboard();
-                }
-            }
-        }
-
         // ========================================
-        // DASHBOARD
+        // FUNCIONES AUXILIARES
         // ========================================
-        function showDashboard() {
-            hideAllSections();
-            document.getElementById('header').style.display = 'block';
-            document.getElementById('userInfo').textContent = `${currentUser.nombre} (${currentUser.rol})`;
-            document.getElementById('appContainer').style.display = 'block';
-
-            const panel = document.getElementById(`${currentUser.rol}Panel`);
-            document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
-            panel.style.display = 'block';
-
-            if (currentUser.rol === 'estudiante') renderStudentRoutes();
-            if (currentUser.rol === 'conductor') renderDriverPanel();
-            if (currentUser.rol === 'admin') renderAdminPanel();
-        }
-
-        function hideAllSections() {
-            document.querySelectorAll('.active-section').forEach(s => s.classList.remove('active-section'));
-            document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
-        }
-
-        // ========================================
-        // PANEL ESTUDIANTE
-        // ========================================
-        function populateSelects() {
-            const origenSelect = document.getElementById('origenSelect');
-            const destinoSelect = document.getElementById('destinoSelect');
-            CIUDADES.forEach(ciudad => {
-                origenSelect.innerHTML += `<option value="${ciudad}">${ciudad}</option>`;
-                destinoSelect.innerHTML += `<option value="${ciudad}">${ciudad}</option>`;
-            });
-        }
-
-        function calcularTiempoTotal(origen, destino) {
-            let tiempo = 0;
-            // Lógica de tramos reales
-            if (origen === 'Pichanaqui' && destino === 'Mazamari') tiempo = 80; // 60+20
-            else if (origen === 'Pangoa' && destino === 'Mazamari') tiempo = 10;
-            else if (origen === 'Pichanaqui' && destino === 'Satipo') tiempo = 60;
-            return Math.round(tiempo * 1.03);
-        }
-
-        function calcularETA(salida, minutos) {
-            const [h, m] = salida.split(':').map(Number);
-            const fecha = new Date(2024, 0, 1, h, m);
-            fecha.setMinutes(fecha.getMinutes() + minutos);
-            return fecha.toTimeString().slice(0, 5);
-        }
-
-        function renderStudentRoutes() {
-            const origen = document.getElementById('origenSelect').value;
-            const destino = document.getElementById('destinoSelect').value;
-            const grid = document.getElementById('studentRoutes');
-
-            if (!origen || !destino || origen === destino) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-gray);">Selecciona origen y destino diferentes</p>';
-                return;
-            }
-
-            const tiempoTotal = calcularTiempoTotal(origen, destino);
-            grid.innerHTML = HORARIOS.map(horario => {
-                const eta = calcularETA(horario, tiempoTotal);
-                const rutaId = `${origen}-${destino}-${horario}`;
-                const reserva = reservas.find(r => r.id === rutaId) || { ocupados: 0, capacidad: 25, estado: 'waiting' };
-                const disponibles = reserva.capacidad - reserva.ocupados;
-
-                return `
-                    <div class="card">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                            <h3>${origen} → ${destino}</h3>
-                            <span class="status-badge status-${reserva.estado}">${reserva.estado === 'waiting' ? 'En espera' : 'En camino'}</span>
-                        </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem;">
-                            <div><strong>Salida:</strong> ${horario}</div>
-                            <div><strong>ETA:</strong> ${eta}</div>
-                            <div><strong>Tiempo:</strong> ${tiempoTotal}min</div>
-                            <div><strong>Cupos:</strong> ${disponibles}/${reserva.capacidad}</div>
-                        </div>
-                        <button class="btn ${disponibles === 0 ? 'btn-danger' : 'btn-success'}" 
-                                ${disponibles === 0 ? 'disabled' : ''} 
-                                onclick="${disponibles > 0 ? `reservar('${rutaId}', ${reserva.ocupados})` : ''}"
-                                style="width: 100%;">
-                            ${disponibles === 0 ? 'SIN CUPOS' : `RESERVAR (${disponibles})`}
-                        </button>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function reservar(rutaId, ocupados) {
-            if (ocupados < 25) {
-                reservas.push({ id: rutaId, ocupados: ocupados + 1, capacidad: 25, estado: 'waiting' });
-                showNotification('¡Reserva confirmada!', 'success');
-                renderStudentRoutes();
-            }
-        }
-
-        // ========================================
-        // PANEL CONDUCTOR
-        // ========================================
-        function renderDriverPanel() {
-            const card = document.getElementById('driverCard');
-            card.innerHTML = `
-                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
-                    <h2>Ruta Activa: Pichanaqui → Mazamari</h2>
-                    <span class="status-badge status-enroute">En camino</span>
-                </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--primary-blue);">18/25</div>
-                        <div>Pasajeros</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--success-green);">08:45</div>
-                        <div>ETA</div>
-                    </div>
-                </div>
-                <div style="background: #F1F5F9; padding: 1.5rem; border-radius: 16px; margin-bottom: 2rem; max-height: 300px; overflow-y: auto;">
-                    <h4>Lista de Pasajeros (18)</h4>
-                    ${Array(18).fill().map((_, i) => `<div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--border-gray);">
-                        <span>Pasajero ${i+1}</span>
-                        <i class="fas fa-check-circle" style="color: var(--success-green);"></i>
-                    </div>`).join('')}
-                </div>
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <button class="btn btn-success" onclick="confirmarTodos()">Confirmar Todos</button>
-                    <button class="btn btn-primary" onclick="iniciarViaje()">Iniciar Viaje</button>
-                    <button class="btn btn-danger" onclick="finalizarViaje()">Finalizar Viaje</button>
-                </div>
-            `;
-        }
-
-        function confirmarTodos() { showNotification('Todos confirmados', 'success'); }
-        function iniciarViaje() { showNotification('Viaje iniciado', 'success'); }
-        function finalizarViaje() { showNotification('Viaje finalizado', 'success'); }
-
-        // ========================================
-        // PANEL ADMIN
-        // ========================================
-        function renderAdminPanel() {
-            const tbody = document.getElementById('usersTable');
-            tbody.innerHTML = usuarios.map(u => `
-                <tr>
-                    <td>${u.id}</td>
-                    <td>${u.nombre}</td>
-                    <td>${u.email}</td>
-                    <td><span style="background: ${u.rol === 'admin' ? '#3B82F6' : u.rol === 'conductor' ? '#10B981' : '#F59E0B'}; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">${u.rol}</span></td>
-                    <td><span class="user-status ${u.estado}">${u.estado === 'activo' ? 'Activo' : 'Baneado'}</span></td>
-                    <td>
-                        <button class="btn btn-${u.estado === 'activo' ? 'danger' : 'success'}" style="padding: 0.5rem 1rem; font-size: 0.8rem;" 
-                                onclick="toggleUserStatus(${u.id})">
-                            ${u.estado === 'activo' ? 'Banear' : 'Activar'}
-                        </button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        function toggleUserStatus(userId) {
-            const usuario = usuarios.find(u => u.id === userId);
-            usuario.estado = usuario.estado === 'activo' ? 'baneado' : 'activo';
-            if (currentUser.id === userId && usuario.estado === 'baneado') {
-                logout();
-                return;
-            }
-            renderAdminPanel();
-            showNotification('Estado actualizado', 'success');
-        }
-
-        // ========================================
-        // UTILIDADES
-        // ========================================
-        function setupEventListeners() {
-            document.getElementById('hamburger').addEventListener('click', () => {
-                document.getElementById('navActions').classList.toggle('active');
-            });
-        }
-
-        function showNotification(msg, type = 'success') {
+        function showNotification(message, type) {
             const notif = document.createElement('div');
             notif.className = `notification ${type}`;
-            notif.textContent = msg;
+            notif.textContent = message;
             document.body.appendChild(notif);
-            setTimeout(() => notif.style.transform = 'translateX(0)', 100);
+            
+            setTimeout(() => notif.style.transform = 'translateX(-50%) translateY(0)', 100);
+            
             setTimeout(() => {
-                notif.style.transform = 'translateX(400px)';
+                notif.style.transform = 'translateX(-50%) translateY(-100%)';
                 setTimeout(() => notif.remove(), 400);
-            }, 3000);
+            }, 4000);
         }
 
-        function simulateData() {
-            setInterval(() => {
-                // Simular actividad
-            }, 10000);
+        function showRegister() {
+            showNotification('📝 Redirigiendo al registro...', 'success');
+            setTimeout(() => {
+                alert('🆕 Pantalla de REGISTRO\n\nFuncionalidad lista para implementar');
+            }, 1000);
         }
 
-        // INIT
-        init();
+        function showAdminAccess() {
+            const pass = prompt('🔐 Contraseña Admin:');
+            if (pass === 'admin123') {
+                showNotification('👑 Acceso ADMIN concedido', 'success');
+                alert('🛠️ Panel Admin completo\n\nGestión usuarios + banear');
+            } else {
+                showNotification('❌ Acceso denegado', 'error');
+            }
+        }
+
+        // Enter para login rápido
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+            }
+        });
+
+        // Auto-fill demo (Ctrl+D)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'd') {
+                document.getElementById('loginEmail').value = 'ana@estudiante.com';
+                document.getElementById('loginPassword').value = '123';
+                showNotification('🎯 Credenciales de demo cargadas (Estudiante)', 'success');
+            }
+        });
+
+        console.log('🎉 UniMove Login Listo!');
+        console.log('👉 Usa Ctrl+D para auto-fill demo');
+        console.log('📧 ana@estudiante.com / 123');
     </script>
 </body>
 </html>
