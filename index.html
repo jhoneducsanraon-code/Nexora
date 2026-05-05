@@ -17,16 +17,12 @@
             --text-dark: #1E293B;
             --text-gray: #64748B;
             --border-gray: #E2E8F0;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px rgb(0 0 0 / 0.1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -62,26 +58,31 @@
             color: var(--primary-blue);
         }
 
-        .nav-links {
+        .nav-actions {
             display: flex;
-            list-style: none;
-            gap: 2rem;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .nav-links a {
-            color: var(--text-gray);
-            text-decoration: none;
-            font-weight: 500;
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-size: 0.95rem;
         }
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--primary-blue);
-            background: var(--bg-light);
-        }
+        .btn-primary { background: var(--primary-blue); color: white; }
+        .btn-success { background: var(--success-green); color: white; }
+        .btn-danger { background: var(--danger-red); color: white; }
+        .btn-secondary { background: transparent; color: var(--text-gray); border: 2px solid var(--border-gray); }
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 
         .hamburger {
             display: none;
@@ -90,144 +91,109 @@
             gap: 4px;
         }
 
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--primary-blue);
-            transition: 0.3s;
-        }
+        .hamburger span { width: 25px; height: 3px; background: var(--primary-blue); transition: 0.3s; }
 
-        /* Landing */
-        .landing {
+        /* Auth Forms */
+        .auth-container {
             min-height: 100vh;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-light) 100%);
-            color: white;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            align-items: center;
-            text-align: center;
             padding: 2rem;
         }
 
-        .landing h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-
-        .landing p {
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
-            max-width: 600px;
-            margin-bottom: 2.5rem;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
+        .auth-card {
+            background: var(--bg-white);
+            padding: 3rem;
+            border-radius: 24px;
             box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 450px;
         }
 
-        .btn-primary {
-            background: var(--bg-white);
-            color: var(--primary-blue);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 25px 30px -5px rgb(0 0 0 / 0.15);
-        }
-
-        .btn-success { background: var(--success-green); color: white; }
-        .btn-danger { background: var(--danger-red); color: white; }
-        .btn-warning { background: var(--warning-yellow); color: white; }
-
-        /* App Container */
-        .app-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: none;
-        }
-
-        /* Selectors */
-        .selectors {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+        .auth-tabs {
+            display: flex;
             margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border-gray);
         }
 
-        .select-container {
-            background: var(--bg-white);
-            padding: 1.5rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-gray);
+        .auth-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-gray);
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
         }
 
-        .select-container label {
+        .auth-tab.active {
+            color: var(--primary-blue);
+            border-bottom-color: var(--primary-blue);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
             display: block;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             font-weight: 600;
             color: var(--text-dark);
         }
 
-        select {
+        .form-group input {
             width: 100%;
-            padding: 0.75rem;
+            padding: 1rem;
             border: 2px solid var(--border-gray);
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 1rem;
-            background: white;
+            transition: border-color 0.3s;
         }
 
-        select:focus {
+        .form-group input:focus {
             outline: none;
             border-color: var(--primary-blue);
             box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1);
         }
 
-        /* Panel Tabs */
-        .panel-tabs {
-            display: flex;
-            gap: 1rem;
+        /* Main App */
+        .app-container { max-width: 1200px; margin: 0 auto; padding: 2rem; display: none; }
+
+        .page-header {
+            text-align: center;
             margin-bottom: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
         }
 
-        .tab {
-            padding: 1rem 2rem;
+        .page-header h1 {
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Selectors */
+        .selectors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .select-card {
             background: var(--bg-white);
-            border: 2px solid var(--border-gray);
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .tab.active {
-            background: var(--primary-blue);
-            color: white;
-            border-color: var(--primary-blue);
-            transform: translateY(-2px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-gray);
         }
 
         /* Cards Grid */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
         }
 
         .card {
@@ -238,41 +204,14 @@
             transition: all 0.3s;
             border: 1px solid var(--border-gray);
             position: relative;
-            overflow: hidden;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--success-green));
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-        }
-
-        .route-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-        }
+        .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
 
         .status-badge {
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
             font-weight: 700;
             text-transform: uppercase;
         }
@@ -282,131 +221,52 @@
         .status-full { background: #FEE2E2; color: var(--danger-red); }
         .status-finished { background: #E5E7EB; color: var(--text-gray); }
 
-        .route-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+        /* Users Table Admin */
+        .users-table {
+            background: var(--bg-white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            overflow-x: auto;
         }
 
-        .detail-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        .detail-label {
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .detail-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        .eta-container {
-            background: linear-gradient(135deg, var(--success-green), #059669);
-            color: white;
+        th, td {
             padding: 1rem;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-gray);
         }
 
-        .eta-time {
-            font-size: 1.8rem;
-            font-weight: 800;
+        th { font-weight: 700; color: var(--text-dark); }
+
+        .user-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
-        .seats-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .seats-count {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-        }
-
-        .progress-bar {
-            flex: 1;
-            height: 12px;
-            background: var(--border-gray);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-blue), var(--success-green));
-            transition: width 0.5s ease;
-            border-radius: 6px;
-        }
-
-        /* Passenger List */
-        .passenger-list {
-            max-height: 200px;
-            overflow-y: auto;
-            margin-bottom: 1.5rem;
-        }
-
-        .passenger-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background: #F1F5F9;
-            border-radius: 12px;
-            margin-bottom: 0.5rem;
-            border-left: 4px solid var(--border-gray);
-        }
-
-        .passenger-confirmed {
-            border-left-color: var(--success-green);
-            background: #ECFDF5;
-        }
+        .status-active { background: #D1FAE5; color: var(--success-green); }
+        .status-banned { background: #FEE2E2; color: var(--danger-red); }
 
         /* Mobile */
         @media (max-width: 768px) {
             .hamburger { display: flex; }
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: var(--bg-white);
-                flex-direction: column;
-                padding: 2rem 0;
-                transition: left 0.3s;
-                box-shadow: var(--shadow-lg);
-            }
-            .nav-links.active { left: 0; }
-            
+            .nav-actions { position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px); background: var(--bg-white); flex-direction: column; padding: 2rem; transition: left 0.3s; }
+            .nav-actions.active { left: 0; }
             .cards-grid { grid-template-columns: 1fr; }
-            .route-details { grid-template-columns: 1fr; }
             .selectors { grid-template-columns: 1fr; }
+            .auth-card { padding: 2rem 1.5rem; }
             .btn { width: 100%; }
-            .app-container { padding: 1rem; }
         }
 
         /* Animations */
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .card { animation: slideInUp 0.6s ease forwards; }
-        .card:nth-child(2) { animation-delay: 0.1s; }
-        .card:nth-child(3) { animation-delay: 0.2s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .card, .auth-card { animation: fadeIn 0.5s ease; }
 
         .notification {
             position: fixed;
@@ -418,26 +278,23 @@
             font-weight: 600;
             z-index: 1000;
             transform: translateX(400px);
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: all 0.4s;
         }
-
-        .notification.success { background: var(--success-green); }
-        .notification.error { background: var(--danger-red); }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
+    <header class="header" id="header" style="display: none;">
         <nav class="navbar">
             <div class="logo">
-                <i class="fas fa-bus"></i>
-                UniMove Junín
+                <i class="fas fa-bus"></i> UniMove
             </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#" class="nav-link active" data-panel="home">Inicio</a></li>
-                <li><a href="#" class="nav-link" data-panel="student">Estudiante</a></li>
-                <li><a href="#" class="nav-link" data-panel="driver">Conductor</a></li>
-            </ul>
+            <div class="nav-actions" id="navActions">
+                <span id="userInfo" style="font-weight: 600;"></span>
+                <button class="btn btn-danger" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Salir
+                </button>
+            </div>
             <div class="hamburger" id="hamburger">
                 <span></span><span></span><span></span>
             </div>
@@ -445,356 +302,440 @@
     </header>
 
     <!-- Landing -->
-    <section id="home" class="landing active-panel">
-        <h1>Llega puntual a tus clases<br><strong>sin perder tiempo</strong></h1>
-        <p>Transporte organizado por horarios fijos entre Pichanaqui, Satipo, Mazamari y Pangoa. Reserva con antelación y sé puntual.</p>
-        <a href="#" class="btn btn-primary" data-panel="student">
-            <i class="fas fa-chair"></i> Reservar ahora
-        </a>
+    <section id="landing" class="auth-container active-section">
+        <div class="auth-card">
+            <h1 style="color: var(--primary-blue); margin-bottom: 1rem; font-size: 2.5rem;">
+                <i class="fas fa-bus"></i> UniMove
+            </h1>
+            <p style="color: var(--text-gray); margin-bottom: 2rem; font-size: 1.2rem;">
+                Llega puntual a tus clases sin perder tiempo
+            </p>
+            <button class="btn btn-primary" style="width: 100%; font-size: 1.2rem; padding: 1.25rem;" onclick="showAuth('login')">
+                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+            </button>
+            <p style="margin-top: 1.5rem; color: var(--text-gray);">
+                ¿Nuevo usuario? <a href="#" style="color: var(--primary-blue); font-weight: 600;" onclick="showAuth('register')">Regístrate aquí</a>
+            </p>
+        </div>
     </section>
 
-    <!-- App -->
-    <div class="app-container">
-        <!-- Panel Selector -->
-        <div class="panel-tabs">
-            <div class="tab active" data-panel="student">Estudiante</div>
-            <div class="tab" data-panel="driver">Conductor</div>
-        </div>
-
-        <!-- Student Panel -->
-        <section id="student-panel" class="panel-content active-panel">
-            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary-blue);">
-                <i class="fas fa-route"></i> Buscar Ruta
-            </h2>
-            
-            <div class="selectors">
-                <div class="select-container">
-                    <label><i class="fas fa-map-marker-alt"></i> Origen</label>
-                    <select id="originSelect">
-                        <option value="">Seleccionar...</option>
+    <!-- Auth Forms -->
+    <section id="auth" class="auth-container">
+        <div class="auth-card">
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuth('login')">Iniciar Sesión</div>
+                <div class="auth-tab" onclick="switchAuth('register')">Registrarse</div>
+            </div>
+            <form id="authForm">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Nombre Completo</label>
+                    <input type="text" id="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Contraseña</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-group" id="rolGroup" style="display: none;">
+                    <label><i class="fas fa-user-tag"></i> Rol</label>
+                    <select id="rol" required>
+                        <option value="estudiante">Estudiante</option>
+                        <option value="conductor">Conductor</option>
+                        <option value="admin">Administrador</option>
                     </select>
                 </div>
-                <div class="select-container">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <span id="authBtnText">Iniciar Sesión</span>
+                </button>
+            </form>
+            <p style="margin-top: 1.5rem; text-align: center; color: var(--text-gray);">
+                <a href="#" onclick="showLanding()" style="color: var(--primary-blue); font-weight: 600;">Volver al inicio</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- App Container -->
+    <div id="appContainer" class="app-container">
+        <!-- Student Panel -->
+        <section id="studentPanel" class="panel">
+            <div class="page-header">
+                <h1><i class="fas fa-user-graduate"></i> Panel Estudiante</h1>
+            </div>
+            <div class="selectors">
+                <div class="select-card">
+                    <label><i class="fas fa-map-marker-alt"></i> Origen</label>
+                    <select id="origenSelect" onchange="renderStudentRoutes()"></select>
+                </div>
+                <div class="select-card">
                     <label><i class="fas fa-flag-checkered"></i> Destino</label>
-                    <select id="destinationSelect">
-                        <option value="">Seleccionar...</option>
-                    </select>
+                    <select id="destinoSelect" onchange="renderStudentRoutes()"></select>
                 </div>
             </div>
-
-            <div class="cards-grid" id="routesGrid"></div>
+            <div class="cards-grid" id="studentRoutes"></div>
         </section>
 
         <!-- Driver Panel -->
-        <section id="driver-panel" class="panel-content">
+        <section id="driverPanel" class="panel">
+            <div class="page-header">
+                <h1><i class="fas fa-user-tie"></i> Panel Conductor</h1>
+            </div>
             <div class="cards-grid">
                 <div class="card" id="driverCard">
-                    <div class="card-header">
-                        <div class="route-title">Ruta Pichanaqui → Mazamari</div>
-                        <div class="status-badge status-enroute" id="driverStatus">En camino</div>
-                    </div>
-                    <div class="route-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Salida</span>
-                            <span class="detail-value" id="driverSalida">07:30 AM</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">ETA</span>
-                            <span class="detail-value" id="driverETA">08:45 AM</span>
-                        </div>
-                    </div>
-                    <div class="seats-info">
-                        <div class="seats-count" id="driverSeats">14/20</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="driverProgress" style="width: 70%"></div>
-                        </div>
-                    </div>
-                    <div class="passenger-list" id="passengerList"></div>
-                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                        <button class="btn btn-success" onclick="confirmAllPassengers()">
-                            <i class="fas fa-check-double"></i> Confirmar Todos
-                        </button>
-                        <button class="btn btn-warning" onclick="startTrip()">
-                            <i class="fas fa-play"></i> Iniciar Viaje
-                        </button>
-                        <button class="btn btn-danger" onclick="finishTrip()">
-                            <i class="fas fa-flag-checkered"></i> Finalizar
-                        </button>
-                    </div>
+                    <!-- Driver content rendered dynamically -->
                 </div>
+            </div>
+        </section>
+
+        <!-- Admin Panel -->
+        <section id="adminPanel" class="panel">
+            <div class="page-header">
+                <h1><i class="fas fa-user-shield"></i> Panel Administrador</h1>
+            </div>
+            <div class="users-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Rol</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTable"></tbody>
+                </table>
             </div>
         </section>
     </div>
 
     <script>
         // ========================================
-        // DATOS DEL SISTEMA (SIMULADOS)
+        // DATOS DEL SISTEMA
         // ========================================
         const CIUDADES = ['Pichanaqui', 'Satipo', 'Mazamari', 'Pangoa'];
         const TRAMOS = [
-            { origen: 'Pichanaqui', destino: 'Satipo', tiempo: 60 },
-            { origen: 'Satipo', destino: 'Mazamari', tiempo: 20 },
-            { origen: 'Pangoa', destino: 'Mazamari', tiempo: 10 }
+            { origen: "Pichanaqui", destino: "Satipo", tiempo: 60 },
+            { origen: "Satipo", destino: "Mazamari", tiempo: 20 },
+            { origen: "Pangoa", destino: "Mazamari", tiempo: 10 }
+        ];
+        const HORARIOS = ['07:30', '08:45', '10:15', '12:00', '14:30'];
+
+        let usuarios = [
+            { id: 1, nombre: 'Ana García', email: 'ana@estudiante.com', password: '123', rol: 'estudiante', estado: 'activo' },
+            { id: 2, nombre: 'Carlos López', email: 'carlos@conductor.com', password: '123', rol: 'conductor', estado: 'activo' },
+            { id: 3, nombre: 'Admin Master', email: 'admin@admin.com', password: '123', rol: 'admin', estado: 'activo' },
+            { id: 4, nombre: 'Juan Baneado', email: 'juan@baneado.com', password: '123', rol: 'estudiante', estado: 'baneado' }
         ];
 
-        const HORARIOS = [
-            { hora: '07:30', label: '07:30 AM' },
-            { hora: '08:45', label: '08:45 AM' },
-            { hora: '10:15', label: '10:15 AM' },
-            { hora: '12:00', label: '12:00 PM' },
-            { hora: '14:30', label: '02:30 PM' }
-        ];
-
-        let reservas = [
-            {
-                id: 1,
-                ruta: 'Pichanaqui-Mazamari',
-                origen: 'Pichanaqui',
-                destino: 'Mazamari',
-                horario: '07:30',
-                pasajeros: 14,
-                totalAsientos: 20,
-                estado: 'enroute',
-                tiempoTotal: 83, // 60 + 20 + 3%
-                salida: '07:30',
-                eta: '08:45',
-                listaPasajeros: [
-                    { nombre: 'Ana García', confirmada: true },
-                    { nombre: 'Carlos López', confirmada: false },
-                    { nombre: 'María Pérez', confirmada: true },
-                    { nombre: 'Juan Martínez', confirmada: true }
-                ]
-            }
-        ];
-
-        let selectedOrigen = '';
-        let selectedDestino = '';
+        let reservas = [];
+        let currentUser = null;
+        let authMode = 'login';
 
         // ========================================
         // INICIALIZACIÓN
         // ========================================
-        const navLinks = document.querySelectorAll('.nav-link');
-        const panelTabs = document.querySelectorAll('.tab');
-        const hamburger = document.getElementById('hamburger');
-        const navLinksMenu = document.getElementById('navLinks');
-        const appContainer = document.querySelector('.app-container');
-        const landingSection = document.querySelector('.landing');
-
         function init() {
             populateSelects();
+            loadSession();
             setupEventListeners();
-            renderDriverPanel();
-            simulateRealTime();
+            simulateData();
         }
 
         // ========================================
-        // UTILIDADES DE TIEMPO
+        // AUTENTICACIÓN
         // ========================================
-        function calcularTiempoTotal(origen, destino) {
-            let tiempo = 0;
-            if (origen === 'Pichanaqui' && destino === 'Mazamari') {
-                tiempo = 60 + 20; // Pichanaqui-Satipo + Satipo-Mazamari
-            } else if (origen === 'Pangoa' && destino === 'Mazamari') {
-                tiempo = 10;
+        function showLanding() {
+            hideAllSections();
+            document.getElementById('landing').classList.add('active-section');
+            document.getElementById('header').style.display = 'none';
+        }
+
+        function showAuth(mode) {
+            hideAllSections();
+            document.getElementById('auth').classList.add('active-section');
+            authMode = mode;
+            switchAuth(mode);
+        }
+
+        function switchAuth(mode) {
+            authMode = mode;
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('rolGroup').style.display = mode === 'register' ? 'block' : 'none';
+            document.getElementById('authBtnText').textContent = mode === 'login' ? 'Iniciar Sesión' : 'Registrarse';
+            document.getElementById('nombre').required = mode === 'register';
+            document.getElementById('nombre').placeholder = mode === 'register' ? 'Nombre completo' : '';
+        }
+
+        document.getElementById('authForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (authMode === 'login') {
+                login();
+            } else {
+                register();
             }
-            return Math.round(tiempo * 1.03); // +3% margen
+        });
+
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            const usuario = usuarios.find(u => u.email === email && u.password === password);
+            if (usuario) {
+                if (usuario.estado === 'baneado') {
+                    showNotification('Usuario baneado. Contacta al administrador.', 'error');
+                    return;
+                }
+                currentUser = usuario;
+                saveSession();
+                showDashboard();
+            } else {
+                showNotification('Credenciales incorrectas', 'error');
+            }
         }
 
-        function calcularETA(salida, minutos) {
-            const [hora, minuto] = salida.split(':');
-            const fecha = new Date();
-            fecha.setHours(parseInt(hora), parseInt(minuto), 0);
-            fecha.setMinutes(fecha.getMinutes() + minutos);
-            return fecha.toTimeString().slice(0, 5);
-        }
+        function register() {
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const rol = document.getElementById('rol').value;
 
-        function getStatusClass(estado) {
-            return `status-${estado}`;
-        }
+            if (usuarios.find(u => u.email === email)) {
+                showNotification('Email ya registrado', 'error');
+                return;
+            }
 
-        function getStatusText(estado) {
-            const map = {
-                waiting: 'En espera',
-                enroute: 'En camino',
-                full: 'Lleno',
-                finished: 'Finalizado'
+            const nuevoUsuario = {
+                id: Date.now(),
+                nombre,
+                email,
+                password,
+                rol,
+                estado: 'activo'
             };
-            return map[estado] || estado;
+
+            usuarios.push(nuevoUsuario);
+            currentUser = nuevoUsuario;
+            saveSession();
+            showNotification('Registro exitoso', 'success');
+            showDashboard();
+        }
+
+        function logout() {
+            localStorage.removeItem('unimove_session');
+            currentUser = null;
+            showLanding();
+        }
+
+        function saveSession() {
+            localStorage.setItem('unimove_session', JSON.stringify({
+                userId: currentUser.id,
+                timestamp: Date.now()
+            }));
+        }
+
+        function loadSession() {
+            const session = localStorage.getItem('unimove_session');
+            if (session) {
+                const data = JSON.parse(session);
+                const usuario = usuarios.find(u => u.id === data.userId);
+                if (usuario && usuario.estado === 'activo') {
+                    currentUser = usuario;
+                    showDashboard();
+                }
+            }
         }
 
         // ========================================
-        // RENDERIZADO
+        // DASHBOARD
+        // ========================================
+        function showDashboard() {
+            hideAllSections();
+            document.getElementById('header').style.display = 'block';
+            document.getElementById('userInfo').textContent = `${currentUser.nombre} (${currentUser.rol})`;
+            document.getElementById('appContainer').style.display = 'block';
+
+            const panel = document.getElementById(`${currentUser.rol}Panel`);
+            document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
+            panel.style.display = 'block';
+
+            if (currentUser.rol === 'estudiante') renderStudentRoutes();
+            if (currentUser.rol === 'conductor') renderDriverPanel();
+            if (currentUser.rol === 'admin') renderAdminPanel();
+        }
+
+        function hideAllSections() {
+            document.querySelectorAll('.active-section').forEach(s => s.classList.remove('active-section'));
+            document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
+        }
+
+        // ========================================
+        // PANEL ESTUDIANTE
         // ========================================
         function populateSelects() {
-            const origenSelect = document.getElementById('originSelect');
-            const destinoSelect = document.getElementById('destinationSelect');
-            
+            const origenSelect = document.getElementById('origenSelect');
+            const destinoSelect = document.getElementById('destinoSelect');
             CIUDADES.forEach(ciudad => {
                 origenSelect.innerHTML += `<option value="${ciudad}">${ciudad}</option>`;
                 destinoSelect.innerHTML += `<option value="${ciudad}">${ciudad}</option>`;
             });
         }
 
-        function renderRoutes() {
-            const grid = document.getElementById('routesGrid');
-            const origen = document.getElementById('originSelect').value;
-            const destino = document.getElementById('destinationSelect').value;
+        function calcularTiempoTotal(origen, destino) {
+            let tiempo = 0;
+            // Lógica de tramos reales
+            if (origen === 'Pichanaqui' && destino === 'Mazamari') tiempo = 80; // 60+20
+            else if (origen === 'Pangoa' && destino === 'Mazamari') tiempo = 10;
+            else if (origen === 'Pichanaqui' && destino === 'Satipo') tiempo = 60;
+            return Math.round(tiempo * 1.03);
+        }
+
+        function calcularETA(salida, minutos) {
+            const [h, m] = salida.split(':').map(Number);
+            const fecha = new Date(2024, 0, 1, h, m);
+            fecha.setMinutes(fecha.getMinutes() + minutos);
+            return fecha.toTimeString().slice(0, 5);
+        }
+
+        function renderStudentRoutes() {
+            const origen = document.getElementById('origenSelect').value;
+            const destino = document.getElementById('destinoSelect').value;
+            const grid = document.getElementById('studentRoutes');
 
             if (!origen || !destino || origen === destino) {
-                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-gray);">Selecciona origen y destino diferentes</div>';
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-gray);">Selecciona origen y destino diferentes</p>';
                 return;
             }
 
             const tiempoTotal = calcularTiempoTotal(origen, destino);
-            
             grid.innerHTML = HORARIOS.map(horario => {
-                const eta = calcularETA(horario.hora, tiempoTotal);
-                const rutaKey = `${origen}-${destino}`;
-                const reserva = reservas.find(r => r.ruta === rutaKey && r.horario === horario.hora) || {
-                    pasajeros: 0,
-                    totalAsientos: 20,
-                    estado: 'waiting'
-                };
-
-                const cupos = reserva.totalAsientos - reserva.pasajeros;
-                const progreso = ((reserva.pasajeros / reserva.totalAsientos) * 100);
+                const eta = calcularETA(horario, tiempoTotal);
+                const rutaId = `${origen}-${destino}-${horario}`;
+                const reserva = reservas.find(r => r.id === rutaId) || { ocupados: 0, capacidad: 25, estado: 'waiting' };
+                const disponibles = reserva.capacidad - reserva.ocupados;
 
                 return `
                     <div class="card">
-                        <div class="card-header">
-                            <div class="route-title">${origen} → ${destino}</div>
-                            <div class="status-badge ${getStatusClass(reserva.estado)}">
-                                ${getStatusText(reserva.estado)}
-                            </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h3>${origen} → ${destino}</h3>
+                            <span class="status-badge status-${reserva.estado}">${reserva.estado === 'waiting' ? 'En espera' : 'En camino'}</span>
                         </div>
-                        <div class="route-details">
-                            <div class="detail-item">
-                                <span class="detail-label">Salida</span>
-                                <span class="detail-value">${horario.label}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Tiempo estimado</span>
-                                <span class="detail-value">${tiempoTotal} min</span>
-                            </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem;">
+                            <div><strong>Salida:</strong> ${horario}</div>
+                            <div><strong>ETA:</strong> ${eta}</div>
+                            <div><strong>Tiempo:</strong> ${tiempoTotal}min</div>
+                            <div><strong>Cupos:</strong> ${disponibles}/${reserva.capacidad}</div>
                         </div>
-                        <div class="eta-container">
-                            <div>ETA</div>
-                            <div class="eta-time">${eta}</div>
-                        </div>
-                        <div class="seats-info">
-                            <div class="seats-count">${cupos}/${reserva.totalAsientos} cupos</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: ${progreso}%"></div>
-                            </div>
-                        </div>
-                        <button class="btn ${cupos === 0 ? 'btn-danger' : 'btn-success'} ${cupos === 0 ? 'disabled' : ''}" 
-                                ${cupos === 0 ? 'disabled' : ''} 
-                                onclick="reservarAsiento('${rutaKey}', '${horario.hora}')">
-                            ${cupos === 0 ? '<i class="fas fa-ban"></i> Sin cupos' : '<i class="fas fa-chair"></i> Reservar (' + cupos + ')'}
+                        <button class="btn ${disponibles === 0 ? 'btn-danger' : 'btn-success'}" 
+                                ${disponibles === 0 ? 'disabled' : ''} 
+                                onclick="${disponibles > 0 ? `reservar('${rutaId}', ${reserva.ocupados})` : ''}"
+                                style="width: 100%;">
+                            ${disponibles === 0 ? 'SIN CUPOS' : `RESERVAR (${disponibles})`}
                         </button>
                     </div>
                 `;
             }).join('');
         }
 
-        function renderDriverPanel() {
-            const reserva = reservas[0];
-            document.getElementById('driverStatus').className = `status-badge ${getStatusClass(reserva.estado)}`;
-            document.getElementById('driverStatus').textContent = getStatusText(reserva.estado);
-            document.getElementById('driverSalida').textContent = reserva.salida;
-            document.getElementById('driverETA').textContent = reserva.eta;
-            document.getElementById('driverSeats').textContent = `${reserva.pasajeros}/${reserva.totalAsientos}`;
-            document.getElementById('driverProgress').style.width = `${(reserva.pasajeros / reserva.totalAsientos) * 100}%`;
+        function reservar(rutaId, ocupados) {
+            if (ocupados < 25) {
+                reservas.push({ id: rutaId, ocupados: ocupados + 1, capacidad: 25, estado: 'waiting' });
+                showNotification('¡Reserva confirmada!', 'success');
+                renderStudentRoutes();
+            }
+        }
 
-            const lista = document.getElementById('passengerList');
-            lista.innerHTML = reserva.listaPasajeros.map(p => `
-                <div class="passenger-item ${p.confirmada ? 'passenger-confirmed' : ''}">
-                    <span>${p.nombre}</span>
-                    <i class="fas ${p.confirmada ? 'fa-check-circle' : 'fa-clock'}"></i>
+        // ========================================
+        // PANEL CONDUCTOR
+        // ========================================
+        function renderDriverPanel() {
+            const card = document.getElementById('driverCard');
+            card.innerHTML = `
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+                    <h2>Ruta Activa: Pichanaqui → Mazamari</h2>
+                    <span class="status-badge status-enroute">En camino</span>
                 </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--primary-blue);">18/25</div>
+                        <div>Pasajeros</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--success-green);">08:45</div>
+                        <div>ETA</div>
+                    </div>
+                </div>
+                <div style="background: #F1F5F9; padding: 1.5rem; border-radius: 16px; margin-bottom: 2rem; max-height: 300px; overflow-y: auto;">
+                    <h4>Lista de Pasajeros (18)</h4>
+                    ${Array(18).fill().map((_, i) => `<div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--border-gray);">
+                        <span>Pasajero ${i+1}</span>
+                        <i class="fas fa-check-circle" style="color: var(--success-green);"></i>
+                    </div>`).join('')}
+                </div>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="btn btn-success" onclick="confirmarTodos()">Confirmar Todos</button>
+                    <button class="btn btn-primary" onclick="iniciarViaje()">Iniciar Viaje</button>
+                    <button class="btn btn-danger" onclick="finalizarViaje()">Finalizar Viaje</button>
+                </div>
+            `;
+        }
+
+        function confirmarTodos() { showNotification('Todos confirmados', 'success'); }
+        function iniciarViaje() { showNotification('Viaje iniciado', 'success'); }
+        function finalizarViaje() { showNotification('Viaje finalizado', 'success'); }
+
+        // ========================================
+        // PANEL ADMIN
+        // ========================================
+        function renderAdminPanel() {
+            const tbody = document.getElementById('usersTable');
+            tbody.innerHTML = usuarios.map(u => `
+                <tr>
+                    <td>${u.id}</td>
+                    <td>${u.nombre}</td>
+                    <td>${u.email}</td>
+                    <td><span style="background: ${u.rol === 'admin' ? '#3B82F6' : u.rol === 'conductor' ? '#10B981' : '#F59E0B'}; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">${u.rol}</span></td>
+                    <td><span class="user-status ${u.estado}">${u.estado === 'activo' ? 'Activo' : 'Baneado'}</span></td>
+                    <td>
+                        <button class="btn btn-${u.estado === 'activo' ? 'danger' : 'success'}" style="padding: 0.5rem 1rem; font-size: 0.8rem;" 
+                                onclick="toggleUserStatus(${u.id})">
+                            ${u.estado === 'activo' ? 'Banear' : 'Activar'}
+                        </button>
+                    </td>
+                </tr>
             `).join('');
         }
 
+        function toggleUserStatus(userId) {
+            const usuario = usuarios.find(u => u.id === userId);
+            usuario.estado = usuario.estado === 'activo' ? 'baneado' : 'activo';
+            if (currentUser.id === userId && usuario.estado === 'baneado') {
+                logout();
+                return;
+            }
+            renderAdminPanel();
+            showNotification('Estado actualizado', 'success');
+        }
+
         // ========================================
-        // EVENTOS
+        // UTILIDADES
         // ========================================
         function setupEventListeners() {
-            // Navegación
-            document.querySelectorAll('[data-panel]').forEach(el => {
-                el.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    showPanel(el.dataset.panel);
-                });
+            document.getElementById('hamburger').addEventListener('click', () => {
+                document.getElementById('navActions').classList.toggle('active');
             });
-
-            // Selects
-            document.getElementById('originSelect').addEventListener('change', renderRoutes);
-            document.getElementById('destinationSelect').addEventListener('change', renderRoutes);
-
-            // Hamburguesa
-            hamburger.addEventListener('click', () => navLinksMenu.classList.toggle('active'));
         }
 
-        function showPanel(panelName) {
-            document.querySelectorAll('.active-panel').forEach(el => el.classList.remove('active-panel'));
-            document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
-
-            if (panelName === 'home') {
-                landingSection.style.display = 'flex';
-                landingSection.classList.add('active-panel');
-                appContainer.style.display = 'none';
-            } else {
-                landingSection.style.display = 'none';
-                appContainer.style.display = 'block';
-                document.getElementById(`${panelName}-panel`).classList.add('active-panel');
-                document.querySelector(`[data-panel="${panelName}"]`).classList.add('active');
-                
-                if (panelName === 'student') renderRoutes();
-            }
-        }
-
-        // ========================================
-        // ACCIONES PRINCIPALES
-        // ========================================
-        function reservarAsiento(rutaKey, horario) {
-            const reservaExistente = reservas.find(r => r.ruta === rutaKey && r.horario === horario);
-            if (reservaExistente && reservaExistente.pasajeros < reservaExistente.totalAsientos) {
-                reservaExistente.pasajeros++;
-                reservaExistente.listaPasajeros.push({
-                    nombre: `Estudiante ${reservaExistente.pasajeros}`,
-                    confirmada: false
-                });
-                showNotification('¡Reserva confirmada! Revisa tu correo.', 'success');
-                renderRoutes();
-            } else {
-                showNotification('No hay cupos disponibles', 'error');
-            }
-        }
-
-        function confirmAllPassengers() {
-            reservas[0].listaPasajeros.forEach(p => p.confirmada = true);
-            showNotification('Todos los pasajeros confirmados', 'success');
-            renderDriverPanel();
-        }
-
-        function startTrip() {
-            reservas[0].estado = 'enroute';
-            showNotification('Viaje iniciado', 'success');
-            renderDriverPanel();
-        }
-
-        function finishTrip() {
-            reservas[0].estado = 'finished';
-            showNotification('¡Viaje finalizado exitosamente!', 'success');
-            renderDriverPanel();
-        }
-
-        function showNotification(message, type) {
+        function showNotification(msg, type = 'success') {
             const notif = document.createElement('div');
             notif.className = `notification ${type}`;
-            notif.textContent = message;
+            notif.textContent = msg;
             document.body.appendChild(notif);
-            
             setTimeout(() => notif.style.transform = 'translateX(0)', 100);
             setTimeout(() => {
                 notif.style.transform = 'translateX(400px)';
@@ -802,17 +743,10 @@
             }, 3000);
         }
 
-        // ========================================
-        // SIMULACIÓN REAL TIME
-        // ========================================
-        function simulateRealTime() {
+        function simulateData() {
             setInterval(() => {
-                // Simular ocupación creciente
-                if (reservas[0].pasajeros < 18 && Math.random() < 0.3) {
-                    reservas[0].pasajeros++;
-                }
-                renderDriverPanel();
-            }, 8000);
+                // Simular actividad
+            }, 10000);
         }
 
         // INIT
