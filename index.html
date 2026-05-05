@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniMove - Transporte Universitario</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1E40AF;
+            --primary-blue-light: #3B82F6;
+            --success-green: #10B981;
+            --danger-red: #EF4444;
+            --warning-yellow: #F59E0B;
+            --bg-light: #F8FAFC;
+            --bg-white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-gray: #64748B;
+            --border-gray: #E2E8F0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        /* Header y Navbar */
+        .header {
+            background: var(--bg-white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-blue);
+            transition: 0.3s;
+        }
+
+        /* Landing Page */
+        .landing {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-light) 100%);
+            color: white;
+        }
+
+        .landing h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .landing p {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--bg-white);
+            color: var(--primary-blue);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-blue);
+        }
+
+        /* Main App Container */
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        /* Panel Selector */
+        .panel-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .panel-tab {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--border-gray);
+            border-radius: 50px;
+            background: var(--bg-white);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .panel-tab.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+            border: 1px solid var(--border-gray);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .route-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-waiting { background: #FEF3C7; color: var(--warning-yellow); }
+        .status-enroute { background: #D1FAE5; color: var(--success-green); }
+        .status-full { background: #FEE2E2; color: var(--danger-red); }
+
+        .route-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .seats-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .seats-progress {
+            flex: 1;
+            margin: 0 1rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success-green), var(--primary-blue));
+            transition: width 0.3s;
+        }
+
+        .eta {
+            background: var(--success-green);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Passenger List */
+        .passenger-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid var(--border-gray);
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+        }
+
+        .passenger-confirmed {
+            border-color: var(--success-green);
+            background: #ECFDF5;
+        }
+
+        /* Driver Controls */
+        .driver-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .btn-success {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger-red);
+            color: white;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--bg-white);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: 0.3s;
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .panel-selector {
+                flex-direction: column;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .app-container {
+                padding: 1rem;
+            }
+
+            .route-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .landing {
+                padding: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(4) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-bus"></i>
+                UniMove
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active" data-panel="home">Inicio</a></li>
+                <li><a href="#student" class="nav-link" data-panel="student">Estudiante</a></li>
+                <li><a href="#driver" class="nav-link" data-panel="driver">Conductor</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Landing Page -->
+    <section id="home" class="landing active-panel">
+        <h1>¡Llega a tiempo a tus clases!</h1>
+        <p>UniMove optimiza tus rutas universitarias. Reserva tu asiento, conoce la hora exacta de llegada y nunca más llegarás tarde.</p>
+        <div class="cta-buttons">
+            <a href="#student" class="btn btn-primary" data-panel="student">
+                <i class="fas fa-user-graduate"></i>
+                Soy Estudiante
+            </a>
+            <a href="#driver" class="btn btn-secondary" data-panel="driver">
+                <i class="fas fa-user-tie"></i>
+                Soy Conductor
+            </a>
+        </div>
+    </section>
+
+    <!-- App Container -->
+    <div class="app-container" style="display: none;">
+        <!-- Panel Selector -->
+        <div class="panel-selector">
+            <div class="panel-tab active" data-panel="student">Estudiante</div>
+            <div class="panel-tab" data-panel="driver">Conductor</div>
+        </div>
+
+        <!-- Student Panel -->
+        <section id="student-panel" class="panel-content active-panel">
+            <h2><i class="fas fa-route"></i> Rutas Disponibles</h2>
+            <div class="cards-grid" id="routesGrid"></div>
+        </section>
+
+        <!-- Driver Panel -->
+        <section id="driver-panel" class="panel-content">
+            <h2><i class="fas fa-users"></i> Pasajeros Ruta 101</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="route-number">Ruta 101</div>
+                        <div class="status-badge status-enroute">En Camino</div>
+                    </div>
+                    <div class="seats-info">
+                        <div>12/20 pasajeros</div>
+                        <div class="seats-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="eta">ETA: 8 min</div>
+                    </div>
+                    <div id="passengersList"></div>
+                    <div class="driver-controls">
+                        <button class="btn btn-success" onclick="confirmAllPassengers()">
+                            <i class="fas fa-check"></i> Confirmar Todos
+                        </button>
+                        <button class="btn btn-danger" onclick="finishTrip()">
+                            <i class="fas fa-flag-checkered"></i> Finalizar Viaje
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Datos simulados
+        const routesData = [
+            {
+                id: 1,
+                number: '101',
+                origin: 'Campus Central',
+                destination: 'Facultad de Ingeniería',
+                seatsAvailable: 3,
+                totalSeats: 20,
+                status: 'waiting',
+                eta: '5 min',
+                passengers: ['Ana García', 'Carlos López', 'María Pérez']
+            },
+            {
+                id: 2,
+                number: '102',
+                origin: 'Campus Norte',
+                destination: 'Facultad de Medicina',
+                seatsAvailable: 0,
+                totalSeats: 20,
+                status: 'full',
+                eta: '3 min',
+                passengers: ['Juan Martínez', 'Laura Gómez', 'Pedro Sánchez', 'Marta Ruiz']
+            },
+            {
+                id: 3,
+                number: '103',
+                origin: 'Terminal Sur',
+                destination: 'Facultad de Derecho',
+                seatsAvailable: 8,
+                totalSeats: 20,
+                status: 'enroute',
+                eta: '7 min',
+                passengers: ['Diego Torres', 'Sofía Herrera']
+            },
+            {
+                id: 4,
+                number: '104',
+                origin: 'Campus Este',
+                destination: 'Biblioteca Central',
+                seatsAvailable: 12,
+                totalSeats: 20,
+                status: 'waiting',
+                eta: '4 min',
+                passengers: ['Lucía Morales']
+            }
+        ];
+
+        let currentRoutes = [...routesData];
+
+        // DOM Elements
+        const navLinks = document.querySelectorAll('.nav-link');
+        const panelTabs = document.querySelectorAll('.panel-tab');
+        const panelContents = document.querySelectorAll('.panel-content');
+        const hamburger = document.getElementById('hamburger');
+        const navLinksMenu = document.getElementById('navLinks');
+        const appContainer = document.querySelector('.app-container');
+        const landingSection = document.querySelector('.landing');
+        const routesGrid = document.getElementById('routesGrid');
+
+        // Initialize App
+        function initApp() {
+            renderRoutes();
+            setupEventListeners();
+            simulateRealTimeUpdates();
+        }
+
+        // Panel Navigation
+        function showPanel(panelName) {
+            // Hide all panels
+            document.querySelectorAll('.active-panel').forEach(el => {
+                el.classList.remove('active-panel');
+            });
+
+            // Update nav links
+            navLinks.forEach(link => link.classList.remove('active'));
+            document.querySelector(`[data-panel="${panelName}"]`).classList.add('active');
+
+            // Update panel tabs
+            panelTabs.forEach(tab => tab.classList.remove('active'));
+            document.querySelector(`[data-panel="${panelName}"]`)?.classList.add('active');
+
+            // Show selected panel
+            if (panelName === 'home') {
+                landingSection.style.display = 'flex';
+                landingSection.classList.add('active-panel');
+                appContainer.style.display = 'none';
+            } else {
+                landingSection.style.display = 'none';
+                appContainer.style.display = 'block';
+                document.getElementById(`${panelName}-panel`)?.classList.add('active-panel');
+            }
+        }
+
+        // Render Routes
+        function renderRoutes() {
+            routesGrid.innerHTML = currentRoutes.map(route => `
+                <div class="card" data-route-id="${route.id}">
+                    <div class="card-header">
+                        <div class="route-number">Ruta ${route.number}</div>
+                        <div class="status-badge status-${route.status}">${getStatusText(route.status)}</div>
+                    </div>
+                    <div class="route-info">
+                        <div class="info-item">
+                            <span class="info-label"><i class="fas fa-map-marker-alt"></i> Origen</span>
+                            <span class="info-value">${route.origin}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label"><i class="fas fa-flag-checkered"></i> Destino</span>
+                            <span class="info-value">${route.destination}</span>
+                        </div>
+                    </div>
+                    <div class="seats-info">
+                        <div>${route.seatsAvailable}/${route.totalSeats} asientos</div>
+                        <div class="seats-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${((route.totalSeats - route.seatsAvailable) / route.totalSeats) * 100}%"></div>
+                            </div>
+                        </div>
+                        <div class="eta">${route.eta}</div>
+                    </div>
+                    <button class="btn btn-primary ${route.seatsAvailable === 0 ? 'btn-danger' : ''}" 
+                            ${route.seatsAvailable === 0 ? 'disabled' : ''} 
+                            onclick="reserveSeat(${route.id})"
+                            style="width: 100%;">
+                        ${route.seatsAvailable === 0 ? '<i class="fas fa-ban"></i> Lleno' : '<i class="fas fa-chair"></i> Reservar Asiento'}
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Reserve Seat
+        function reserveSeat(routeId) {
+            const route = currentRoutes.find(r => r.id === routeId);
+            if (route && route.seatsAvailable > 0) {
+                route.seatsAvailable--;
+                showNotification('¡Asiento reservado exitosamente!', 'success');
+                renderRoutes();
+            }
+        }
+
+        // Status Text
+        function getStatusText(status) {
+            const statusMap = {
+                waiting: 'En espera',
+                enroute: 'En camino',
+                full: 'Lleno'
+            };
+            return statusMap[status] || status;
+        }
+
+        // Driver Functions
+        function confirmAllPassengers() {
+            showNotification('Todos los pasajeros confirmados', 'success');
+            document.querySelectorAll('.passenger-item').forEach(item => {
+                item.classList.add('passenger-confirmed');
+            });
+        }
+
+        function finishTrip() {
+            showNotification('¡Viaje finalizado exitosamente!', 'success');
+        }
+
+        // Event Listeners
+        function setupEventListeners() {
+            // Navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const panel = link.dataset.panel;
+                    showPanel(panel);
+                });
+            });
+
+            panelTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const panel = tab.dataset.panel;
+                    showPanel(panel);
+                });
+            });
+
+            // Hamburger menu
+            hamburger.addEventListener('click', () => {
+                navLinksMenu.classList.toggle('active');
+            });
+
+            // Close menu on outside click
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.navbar')) {
+                    navLinksMenu.classList.remove('active');
+                }
+            });
+        }
+
+        // Notifications
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--success-green)' : 'var(--primary-blue)'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: var(--shadow-lg);
+                z-index: 1000;
+                transform: translateX(400px);
+                transition: transform 0.3s;
+                font-weight: 600;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        // Simulate real-time updates
+        function simulateRealTimeUpdates() {
+            setInterval(() => {
+                currentRoutes.forEach(route => {
+                    if (route.status === 'waiting' && Math.random() < 0.1) {
+                        route.status = 'enroute';
+                    }
+                    if (route.seatsAvailable > 0 && Math.random() < 0.05) {
+                        route.seatsAvailable--;
+                    }
+                });
+                renderRoutes();
+            }, 5000);
+        }
+
+        // Initialize
+        initApp();
+    </script>
+</body>
+</html>
